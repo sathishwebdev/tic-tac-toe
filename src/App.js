@@ -144,7 +144,7 @@ const reset = () =>{
           <br/>
           <mui.Button
             onClick={playAgain}
-          ><Icons.PlayCircle/> play again
+          ><Icons.Replay/> play again
             </mui.Button>
             <Confetti
       width={width}
