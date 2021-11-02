@@ -172,7 +172,7 @@ const reset = () =>{
               </span>} 
             </p>
             <div className="score">
-              <p> Match No. : {scoreTable.length} </p>
+              <p> Match No. : {scoreTable.length+1} </p>
               <p>Player O : {oCount}</p>
               <p>Player X : {xCount}</p>
             </div>
