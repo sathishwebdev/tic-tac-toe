@@ -5,12 +5,12 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import * as Icons from '@mui/icons-material'
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 // initialize winning counts 
 
@@ -130,7 +130,7 @@ const reset = () => {
             board.map((value, id) => <GameBox key={id} value = {value} id= {id} handleClick = {()=> handleValue(value, id) } />)
           }  
           {winner? <h2 className="winner-text">Player {winner} <br/> <p style={{fontSize:"medium"}}> won the Game</p> <br/> 
-          <p style={{fontSize:"medium"}}>Won {winner === 'X' ? xCount/2 : oCount/2} for {scoreTable.length/2} matches. </p> 
+          <p style={{fontSize:"medium"}}>Won {winner === 'X' ? xCount : oCount} for {scoreTable.length} matches. </p> 
           <br/>
           <mui.Button
             onClick={reset}
@@ -152,10 +152,10 @@ const reset = () => {
            >Toss</mui.Button> :isXturn? `Player X's Turn`: `Player O's Turn`} </p>
           <div className="score">
             <p> Match No. : {scoreTable.length/2} </p>
-            <p>Player X : {xCount/2}</p>
-            <p>Player O : {oCount/2}</p>
+            <p>Player O : {oCount}</p>
+            <p>Player X : {xCount}</p>
             </div>
-            {/* <TableContainer component={mui.Paper}>
+            <TableContainer component={mui.Paper}>
       <Table >
         <TableHead>
           <TableRow>
@@ -170,17 +170,15 @@ const reset = () => {
               key={id}
               // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {id+1}
-              </TableCell>
-              <TableCell align="right">{winData.x}</TableCell>
-              <TableCell align="right">{winData.o}</TableCell>
+              <TableCell>{id+1}</TableCell>
+              <TableCell >{winData.x}</TableCell>
+              <TableCell >{winData.o}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-          */}
+         
        </div>
        </div>
        
