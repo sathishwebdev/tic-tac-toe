@@ -79,13 +79,9 @@ ScoreData(winner)
 
 // get draw 
 
+let isGame = drawLogic(winner, board)
 
-let drawLogic = board.filter((acc)=> !acc ).length
-
-console.log(board.filter((acc)=> !acc ).length);
-
-
-
+console.log(isGame);
 
 // handle Value in the box -> x or o
 
@@ -109,8 +105,11 @@ const toss = () => {
   Math.random() < 0.5? setIsXturn(true) : setIsXturn(false)
 } 
 
-const reset = () => {
-  // setIsXturn(null)
+const playAgain = () => setBoard([null,null,null,null,null,null,null,null,null])
+
+
+const reset = () =>{
+  setIsXturn(null)
   setBoard([null,null,null,null,null,null,null,null,null])
 }
 
@@ -124,17 +123,28 @@ const reset = () => {
       color="inherit"
       >
         {mode? <Icons.DarkMode/> :<Icons.LightMode/> }
-      </mui.IconButton></h1>
+      </mui.IconButton>
+      
+      {/* game box */}
+      </h1>
         <mui.Box className="game-cont">
           {
             board.map((value, id) => <GameBox key={id} value = {value} id= {id} handleClick = {()=> handleValue(value, id) } />)
           }  
-          {winner? <h2 className="winner-text">Player {winner} <br/> <p style={{fontSize:"medium"}}> won the Game</p> <br/> 
+
+          {/* winner announcement  */}
+
+          {isGame? <h2 className="winner-text">Game Match <br/> <p style={{fontSize:"medium"}}> Nobody Won</p> <br/> 
+            <mui.Button
+            onClick={playAgain}
+            ><Icons.Replay/> play again
+            </mui.Button>
+            </h2> : winner? <h2 className="winner-text">Player {winner} <br/> <p style={{fontSize:"medium"}}> won the Game</p> <br/> 
           <p style={{fontSize:"medium"}}>Won {winner === 'X' ? xCount : oCount} for {scoreTable.length} matches. </p> 
           <br/>
           <mui.Button
-            onClick={reset}
-          > play again
+            onClick={playAgain}
+          ><Icons.PlayCircle/> play again
             </mui.Button>
             <Confetti
       width={width}
@@ -145,30 +155,36 @@ const reset = () => {
         
          <div className="score-board">
            <h1 style={{textAlign:"center", color:"rgb(179, 77, 77)"}} >Score Board</h1>
-           <p style={{textAlign:"center"}} >{isXturn === null ? <mui.Button
+           <p style={{textAlign:"center"}} >{isXturn === null ? <span><mui.Button
            onClick = {toss}
            variant="contained"
            color="info"
-           >Toss</mui.Button> :isXturn? `Player X's Turn`: `Player O's Turn`} </p>
+           >Toss</mui.Button></span> : <span>
+              {isXturn? `Player X's Turn`: `Player O's Turn`} 
+          <br/> <mui.Button
+           onClick= {reset}
+           > Reset
+             </mui.Button> </span>} </p>
           <div className="score">
-            <p> Match No. : {scoreTable.length/2} </p>
+            <p> Match No. : {scoreTable.length} </p>
             <p>Player O : {oCount}</p>
             <p>Player X : {xCount}</p>
             </div>
+
+            {/* score table */}
             <TableContainer component={mui.Paper}>
       <Table >
         <TableHead>
           <TableRow>
             <TableCell>Match No.</TableCell>
-            <TableCell align="right">Player X</TableCell>
-            <TableCell align="right">Player O</TableCell>
+            <TableCell>Player X</TableCell>
+            <TableCell>Player O</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {scoreTable.map((winData, id) => (
             <TableRow
               key={id}
-              // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell>{id+1}</TableCell>
               <TableCell >{winData.x}</TableCell>
@@ -211,3 +227,13 @@ const ScoreData = (winner) =>{
        scoreTable.push({x: 'Lose', o:'Won'})
       }
 }
+
+//Game Match Logic
+
+const drawLogic = (winner, board) =>{
+  if (board.filter((acc)=> !acc ).length === 0 && !winner) {
+    scoreTable.push({x: 'Game', o: 'Game'})
+    return true
+  }
+  return false
+  }
