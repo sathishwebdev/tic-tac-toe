@@ -122,7 +122,17 @@ const reset = () =>{
           <h1 style={{width:"100%", textAlign:"center"}}>TIC TAC TOE
           <mui.IconButton onClick={()=>mode? setMode(false) : setMode(true)} color="inherit"> {mode? <Icons.DarkMode/> : <Icons.LightMode/> } </mui.IconButton>
           </h1>
-
+          <div style={{textAlign:"center", width:"100%",}} >
+              {isXturn === null ? 
+              <span>
+                <mui.Button onClick = {toss} variant="contained" color="info" >Toss</mui.Button>
+              </span>
+               :
+              <div className="space-between">
+                {isXturn? <p>Player X's Turn</p>: <p>Player O's Turn</p>} 
+                <mui.Button onClick= {reset}> Reset </mui.Button>
+              </div>} 
+            </div>
           {/* game box */}
 
           <mui.Box className="game-cont">
@@ -158,19 +168,8 @@ const reset = () =>{
         {/* SCORE BOARD */}
 
           <div className="score-board">
+           
             <h1 style={{textAlign:"center", color:"rgb(179, 77, 77)"}} >Score Board</h1>
-            <p style={{textAlign:"center"}} >
-              {isXturn === null ? 
-              <span>
-                <mui.Button onClick = {toss} variant="contained" color="info" >Toss</mui.Button>
-              </span>
-               :
-              <span>
-                {isXturn? `Player X's Turn`: `Player O's Turn`} 
-                <br/> 
-                <mui.Button onClick= {reset}> Reset </mui.Button>
-              </span>} 
-            </p>
             <div className="score">
               <p> Match No. : {scoreTable.length+1} </p>
               <p>Player O : {oCount}</p>

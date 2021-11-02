@@ -95,3 +95,9 @@
   text-align: center;
   flex-direction: column;
 }
+
+.space-between{
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+}
