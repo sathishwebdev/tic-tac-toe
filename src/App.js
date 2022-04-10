@@ -56,13 +56,6 @@ const winnerDecider = ()=>{
   for(let i = 0; i < winCond.length; i++){
     let [a,b,c] = winCond[i]
     if(board[a] !== null && board[a]===board[b] & board[b]===board[c]){
-      
-      
-      // let xSide = {x: 'Won', o: 'Lose'}
-      // let oSide = {x: 'Lose', o:'Won'}
-      //  board[a] === 'O' ? scoreTable.push(oSide) : scoreTable.push(xSide)
-      //  console.log(scoreTable)
-       
       return board[a]
     }
   }
@@ -87,11 +80,6 @@ const handleValue = (value, id) =>{
   }else if(isXturn === null){
 
     // ALERT IF CLICK THE BOARD BEFORE TOSSED
-
-  //   <mui.Stack sx={{ width: '100%' }} spacing={2}>
-  //   <mui.Alert severity="info">This is an info alert — check it out!</mui.Alert>
-  //  </mui.Stack>
-
     alert('Click the Toss button to Start the Game')
   }
 }
