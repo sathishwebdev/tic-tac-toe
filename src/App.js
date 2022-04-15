@@ -35,6 +35,9 @@ export default function App() {
 
   const [board, setBoard] = useState([null,null,null,null,null,null,null,null,null])
 
+  let check = board.filter(val => !val)
+  check = board.length - check.length
+  console.log(check)
 // player state initialize
 
   const [isXturn, setIsXturn] = useState(null)
@@ -52,13 +55,15 @@ const winnerDecider = ()=>{
     [0,4,8],
     [2,4,6]
   ]
-
+if(check > 4){
+  console.log("first")
   for(let i = 0; i < winCond.length; i++){
     let [a,b,c] = winCond[i]
     if(board[a] !== null && board[a]===board[b] & board[b]===board[c]){
       return board[a]
     }
   }
+}
   return null
 }
 
